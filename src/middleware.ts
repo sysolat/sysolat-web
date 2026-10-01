@@ -6,6 +6,8 @@ const DIVISION_SUBDOMAINS: Record<string, string> = {
   imagen: "imagen",
   proteccion: "proteccion",
   juridico: "proteccion", // Support juridico as alias to proteccion
+  personas: "personas",
+  cultura: "personas", // Support cultura as alias to personas
 };
 
 export function middleware(request: NextRequest) {

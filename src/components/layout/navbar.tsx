@@ -16,13 +16,16 @@ export function Navbar() {
   const isStudio = pathname?.startsWith("/studio");
   const isImagen = pathname?.startsWith("/imagen");
   const isProteccion = pathname?.startsWith("/proteccion");
-  const isDivision = isStudio || isImagen || isProteccion;
+  const isPersonas = pathname?.startsWith("/personas");
+  const isDivision = isStudio || isImagen || isProteccion || isPersonas;
   const divisionBadge = isStudio
     ? "STUDIO"
     : isImagen
     ? "IMAGEN"
     : isProteccion
     ? "PROTECCIÓN"
+    : isPersonas
+    ? "PERSONAS"
     : "";
   const divisionCta = isStudio
     ? "Diagnóstico de Marca"
@@ -30,6 +33,8 @@ export function Navbar() {
     ? "Diagnóstico Espacial"
     : isProteccion
     ? "Diagnóstico de Blindaje"
+    : isPersonas
+    ? "Diagnóstico de Talento"
     : "";
 
   useEffect(() => {
