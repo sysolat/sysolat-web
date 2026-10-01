@@ -14,6 +14,10 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const isStudio = pathname?.startsWith("/studio");
+  const isImagen = pathname?.startsWith("/imagen");
+  const isDivision = isStudio || isImagen;
+  const divisionBadge = isStudio ? "STUDIO" : isImagen ? "IMAGEN" : "";
+  const divisionCta = isStudio ? "Diagnóstico de Marca" : isImagen ? "Diagnóstico Espacial" : "";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,9 +41,9 @@ export function Navbar() {
             {/* Brand Logo */}
             <div className="flex items-center gap-3">
               <a
-                href={isStudio ? "https://sysolat.com" : "/"}
+                href={isDivision ? "https://sysolat.com" : "/"}
                 className="inline-block group py-1"
-                title={isStudio ? "Volver al Ecosistema Principal (sysolat.com)" : "Inicio"}
+                title={isDivision ? "Volver al Ecosistema Principal (sysolat.com)" : "Inicio"}
               >
                 <div className="relative h-8 sm:h-9 w-40 sm:w-48 transition-transform duration-300 group-hover:scale-105">
                   <Image
@@ -52,16 +56,16 @@ export function Navbar() {
                   />
                 </div>
               </a>
-              {isStudio && (
+              {isDivision && (
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-[#1E88E5]/20 text-[#42A5F5] border border-[#1E88E5]/40 tracking-wider">
-                  STUDIO
+                  {divisionBadge}
                 </span>
               )}
             </div>
 
             {/* Desktop Navigation Links */}
             <div className="hidden lg:flex items-center gap-8">
-              {isStudio ? (
+              {isDivision ? (
                 <>
                   <a
                     href="#servicios"
@@ -105,10 +109,10 @@ export function Navbar() {
             {/* CTA & Mobile Trigger */}
             <div className="flex items-center gap-4">
               <div className="hidden sm:block">
-                {isStudio ? (
+                {isDivision ? (
                   <a href="#diagnostico">
                     <PrimaryButton className="text-sm px-5 py-2.5 shadow-md shadow-[#1E88E5]/20">
-                      Diagnóstico de Marca
+                      {divisionCta}
                     </PrimaryButton>
                   </a>
                 ) : (
@@ -135,7 +139,9 @@ export function Navbar() {
       <MobileMenu
         isOpen={mobileMenuOpen}
         onClose={() => setMobileMenuOpen(false)}
-        isStudio={isStudio}
+        isDivision={isDivision}
+        divisionBadge={divisionBadge}
+        divisionCta={divisionCta}
       />
     </>
   );

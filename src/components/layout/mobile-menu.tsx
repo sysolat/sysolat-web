@@ -10,10 +10,18 @@ import { PrimaryButton } from "@/components/ui/button";
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
-  isStudio?: boolean;
+  isDivision?: boolean;
+  divisionBadge?: string;
+  divisionCta?: string;
 }
 
-export function MobileMenu({ isOpen, onClose, isStudio = false }: MobileMenuProps) {
+export function MobileMenu({
+  isOpen,
+  onClose,
+  isDivision = false,
+  divisionBadge = "",
+  divisionCta = "",
+}: MobileMenuProps) {
   if (!isOpen) return null;
 
   return (
@@ -30,7 +38,7 @@ export function MobileMenu({ isOpen, onClose, isStudio = false }: MobileMenuProp
         <div>
           <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-8">
             <a
-              href={isStudio ? "https://sysolat.com" : "/"}
+              href={isDivision ? "https://sysolat.com" : "/"}
               onClick={onClose}
               className="inline-block py-1"
             >
@@ -54,10 +62,10 @@ export function MobileMenu({ isOpen, onClose, isStudio = false }: MobileMenuProp
             </button>
           </div>
 
-          {isStudio ? (
+          {isDivision ? (
             <div className="flex flex-col gap-4">
               <span className="text-xs font-mono font-semibold text-[#42A5F5] uppercase tracking-wider mb-2">
-                Studio • Marca & Crecimiento
+                {divisionBadge} • División Especializada
               </span>
               <a
                 href="#servicios"
@@ -112,10 +120,10 @@ export function MobileMenu({ isOpen, onClose, isStudio = false }: MobileMenuProp
         </div>
 
         <div className="pt-8 border-t border-white/10">
-          {isStudio ? (
+          {isDivision ? (
             <a href="#diagnostico" onClick={onClose} className="w-full block">
               <PrimaryButton className="w-full justify-center">
-                Diagnóstico de Marca
+                {divisionCta || "Diagnóstico"}
               </PrimaryButton>
             </a>
           ) : (

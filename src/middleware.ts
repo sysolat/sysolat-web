@@ -1,28 +1,32 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+const DIVISION_SUBDOMAINS = ["studio", "imagen"];
+
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const host = request.headers.get("host") || "";
 
-  // Extract hostname ignoring port (e.g. "studio.sysolat.com" or "studio.localhost")
+  // Extract hostname ignoring port (e.g. "imagen.sysolat.com" or "imagen.localhost")
   const hostname = host.split(":")[0].toLowerCase();
 
-  // Detect if incoming request is targeting the studio subdomain
-  const isStudioSubdomain =
-    hostname === "studio.sysolat.com" ||
-    hostname === "studio.localhost" ||
-    hostname.startsWith("studio.");
+  // Detect if incoming request is targeting any division subdomain
+  for (const division of DIVISION_SUBDOMAINS) {
+    const isTargetSubdomain =
+      hostname === `${division}.sysolat.com` ||
+      hostname === `${division}.localhost` ||
+      hostname.startsWith(`${division}.`);
 
-  if (isStudioSubdomain) {
-    // If the path already starts with /studio, continue
-    if (url.pathname.startsWith("/studio")) {
-      return NextResponse.next();
+    if (isTargetSubdomain) {
+      // If the path already starts with the division route, continue
+      if (url.pathname.startsWith(`/${division}`)) {
+        return NextResponse.next();
+      }
+
+      // Rewrite internal request to the division route
+      url.pathname = url.pathname === "/" ? `/${division}` : `/${division}${url.pathname}`;
+      return NextResponse.rewrite(url);
     }
-
-    // Rewrite internal request to /studio route
-    url.pathname = url.pathname === "/" ? "/studio" : `/studio${url.pathname}`;
-    return NextResponse.rewrite(url);
   }
 
   return NextResponse.next();
