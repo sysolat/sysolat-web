@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   ArrowUpRight,
   Mail,
@@ -51,6 +52,8 @@ const areaDivisionMap: Record<string, { id: string; name: string }> = {
 export function Footer() {
   const [legalModalOpen, setLegalModalOpen] = useState(false);
   const [activeLegalTab, setActiveLegalTab] = useState<LegalTab>("privacidad");
+  const pathname = usePathname();
+  const isStudio = pathname?.startsWith("/studio");
 
   const handleOpenLegalModal = (tab: LegalTab, e?: React.MouseEvent) => {
     if (e) e.preventDefault();
@@ -64,15 +67,45 @@ export function Footer() {
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-[#1E88E5]/5 blur-[140px] pointer-events-none" />
 
       <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
+        {/* If on Studio division page, show connection back to the central ecosystem */}
+        {isStudio && (
+          <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-[#171A21] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-[#1E88E5]/15 border border-[#1E88E5]/30 flex items-center justify-center text-[#42A5F5] flex-shrink-0">
+                <Palette className="w-6 h-6 text-[#1E88E5]" />
+              </div>
+              <div>
+                <p className="text-base font-bold text-white font-heading">
+                  SySo Co. Studio • Marca & Crecimiento
+                </p>
+                <p className="text-xs text-[#8C8C8C] mt-0.5">
+                  Estás navegando en la división creativa de SySo Co. Todas las divisiones comparten el mismo cerebro y gobernanza.
+                </p>
+              </div>
+            </div>
+            <a
+              href="https://sysolat.com"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#1E88E5] text-white text-xs font-semibold hover:bg-[#1976D2] transition-colors flex-shrink-0 shadow-lg shadow-[#1E88E5]/25"
+            >
+              <span>Volver al Ecosistema Principal (sysolat.com)</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </a>
+          </div>
+        )}
+
         {/* Top Section: Brand Statement & Pillars */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-white/10">
           <div className="lg:col-span-5 flex flex-col gap-4">
             {/* Brand Title */}
-            <Link href="/" className="inline-block group mb-1">
+            <a
+              href={isStudio ? "https://sysolat.com" : "/"}
+              className="inline-block group mb-1"
+              title={isStudio ? "Volver a sysolat.com" : "Inicio"}
+            >
               <span className="text-2xl font-bold tracking-tight text-white font-heading">
                 SySo<span className="text-[#1E88E5]">Co.</span>
               </span>
-            </Link>
+            </a>
 
             <p className="text-base text-[#D9D9D9] max-w-md font-medium">
               {SITE_CONFIG.tagline}
