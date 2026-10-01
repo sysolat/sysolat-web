@@ -1,30 +1,35 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const DIVISION_SUBDOMAINS = ["studio", "imagen"];
+const DIVISION_SUBDOMAINS: Record<string, string> = {
+  studio: "studio",
+  imagen: "imagen",
+  proteccion: "proteccion",
+  juridico: "proteccion", // Support juridico as alias to proteccion
+};
 
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const host = request.headers.get("host") || "";
 
-  // Extract hostname ignoring port (e.g. "imagen.sysolat.com" or "imagen.localhost")
+  // Extract hostname ignoring port (e.g. "proteccion.sysolat.com" or "proteccion.localhost")
   const hostname = host.split(":")[0].toLowerCase();
 
   // Detect if incoming request is targeting any division subdomain
-  for (const division of DIVISION_SUBDOMAINS) {
+  for (const [subdomain, route] of Object.entries(DIVISION_SUBDOMAINS)) {
     const isTargetSubdomain =
-      hostname === `${division}.sysolat.com` ||
-      hostname === `${division}.localhost` ||
-      hostname.startsWith(`${division}.`);
+      hostname === `${subdomain}.sysolat.com` ||
+      hostname === `${subdomain}.localhost` ||
+      hostname.startsWith(`${subdomain}.`);
 
     if (isTargetSubdomain) {
       // If the path already starts with the division route, continue
-      if (url.pathname.startsWith(`/${division}`)) {
+      if (url.pathname.startsWith(`/${route}`)) {
         return NextResponse.next();
       }
 
       // Rewrite internal request to the division route
-      url.pathname = url.pathname === "/" ? `/${division}` : `/${division}${url.pathname}`;
+      url.pathname = url.pathname === "/" ? `/${route}` : `/${route}${url.pathname}`;
       return NextResponse.rewrite(url);
     }
   }

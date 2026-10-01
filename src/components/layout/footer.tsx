@@ -40,7 +40,7 @@ const areaDivisionMap: Record<string, { id: string; name: string }> = {
   Marca: { id: "studio", name: "Studio" },
   Espacios: { id: "imagen", name: "Imagen" },
   Experiencias: { id: "eventos", name: "Eventos" },
-  Protección: { id: "juridico", name: "Jurídico" },
+  Protección: { id: "proteccion", name: "Protección" },
   Personas: { id: "cultura", name: "Cultura" },
   Tecnología: { id: "tecnologia", name: "Tecnología" },
   Infraestructura: { id: "infraestructura", name: "Infraestructura" },
@@ -55,7 +55,8 @@ export function Footer() {
   const pathname = usePathname();
   const isStudio = pathname?.startsWith("/studio");
   const isImagen = pathname?.startsWith("/imagen");
-  const isDivision = isStudio || isImagen;
+  const isProteccion = pathname?.startsWith("/proteccion");
+  const isDivision = isStudio || isImagen || isProteccion;
 
   const handleOpenLegalModal = (tab: LegalTab, e?: React.MouseEvent) => {
     if (e) e.preventDefault();
@@ -108,6 +109,32 @@ export function Footer() {
                 </p>
                 <p className="text-xs text-[#8C8C8C] mt-0.5">
                   Estás navegando en la división espacial y arquitectónica de SySo Co. Todas las divisiones comparten el mismo cerebro y gobernanza.
+                </p>
+              </div>
+            </div>
+            <a
+              href="https://sysolat.com"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#1E88E5] text-white text-xs font-semibold hover:bg-[#1976D2] transition-colors flex-shrink-0 shadow-lg shadow-[#1E88E5]/25"
+            >
+              <span>Volver al Ecosistema Principal (sysolat.com)</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </a>
+          </div>
+        )}
+
+        {/* If on Protección division page, show connection back to the central ecosystem */}
+        {isProteccion && (
+          <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-[#171A21] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-[#1E88E5]/15 border border-[#1E88E5]/30 flex items-center justify-center text-[#42A5F5] flex-shrink-0">
+                <ShieldCheck className="w-6 h-6 text-[#1E88E5]" />
+              </div>
+              <div>
+                <p className="text-base font-bold text-white font-heading">
+                  SySo Co. Protección • Seguridad, Blindaje & Protección Corporativa
+                </p>
+                <p className="text-xs text-[#8C8C8C] mt-0.5">
+                  Estás navegando en la división de blindaje legal, cumplimiento y seguridad patrimonial de SySo Co. Todas las divisiones comparten el mismo cerebro y gobernanza.
                 </p>
               </div>
             </div>

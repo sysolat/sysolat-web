@@ -15,9 +15,22 @@ export function Navbar() {
   const pathname = usePathname();
   const isStudio = pathname?.startsWith("/studio");
   const isImagen = pathname?.startsWith("/imagen");
-  const isDivision = isStudio || isImagen;
-  const divisionBadge = isStudio ? "STUDIO" : isImagen ? "IMAGEN" : "";
-  const divisionCta = isStudio ? "Diagnóstico de Marca" : isImagen ? "Diagnóstico Espacial" : "";
+  const isProteccion = pathname?.startsWith("/proteccion");
+  const isDivision = isStudio || isImagen || isProteccion;
+  const divisionBadge = isStudio
+    ? "STUDIO"
+    : isImagen
+    ? "IMAGEN"
+    : isProteccion
+    ? "PROTECCIÓN"
+    : "";
+  const divisionCta = isStudio
+    ? "Diagnóstico de Marca"
+    : isImagen
+    ? "Diagnóstico Espacial"
+    : isProteccion
+    ? "Diagnóstico de Blindaje"
+    : "";
 
   useEffect(() => {
     const handleScroll = () => {
