@@ -11,6 +11,7 @@ const DIVISION_SUBDOMAINS: Record<string, string> = {
   tecnologia: "tecnologia",
   inteligencia: "inteligencia",
   operaciones: "operaciones",
+  eventos: "eventos",
 };
 
 export function middleware(request: NextRequest) {
