@@ -9,6 +9,7 @@ const DIVISION_SUBDOMAINS: Record<string, string> = {
   personas: "personas",
   cultura: "personas", // Support cultura as alias to personas
   tecnologia: "tecnologia",
+  inteligencia: "inteligencia",
 };
 
 export function middleware(request: NextRequest) {

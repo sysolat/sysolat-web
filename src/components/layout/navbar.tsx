@@ -18,8 +18,14 @@ export function Navbar() {
   const isProteccion = pathname?.startsWith("/proteccion");
   const isPersonas = pathname?.startsWith("/personas");
   const isTecnologia = pathname?.startsWith("/tecnologia");
+  const isInteligencia = pathname?.startsWith("/inteligencia");
   const isDivision =
-    isStudio || isImagen || isProteccion || isPersonas || isTecnologia;
+    isStudio ||
+    isImagen ||
+    isProteccion ||
+    isPersonas ||
+    isTecnologia ||
+    isInteligencia;
   const divisionBadge = isStudio
     ? "STUDIO"
     : isImagen
@@ -30,6 +36,8 @@ export function Navbar() {
     ? "PERSONAS"
     : isTecnologia
     ? "TECNOLOGÍA"
+    : isInteligencia
+    ? "INTELIGENCIA"
     : "";
   const divisionCta = isStudio
     ? "Diagnóstico de Marca"
@@ -41,6 +49,8 @@ export function Navbar() {
     ? "Diagnóstico de Talento"
     : isTecnologia
     ? "Diagnóstico Tecnológico"
+    : isInteligencia
+    ? "Diagnóstico de IA"
     : "";
 
   useEffect(() => {

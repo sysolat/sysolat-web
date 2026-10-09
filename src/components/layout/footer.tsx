@@ -58,8 +58,14 @@ export function Footer() {
   const isProteccion = pathname?.startsWith("/proteccion");
   const isPersonas = pathname?.startsWith("/personas");
   const isTecnologia = pathname?.startsWith("/tecnologia");
+  const isInteligencia = pathname?.startsWith("/inteligencia");
   const isDivision =
-    isStudio || isImagen || isProteccion || isPersonas || isTecnologia;
+    isStudio ||
+    isImagen ||
+    isProteccion ||
+    isPersonas ||
+    isTecnologia ||
+    isInteligencia;
 
   const handleOpenLegalModal = (tab: LegalTab, e?: React.MouseEvent) => {
     if (e) e.preventDefault();
@@ -190,6 +196,32 @@ export function Footer() {
                 </p>
                 <p className="text-xs text-[#8C8C8C] mt-0.5">
                   Estás navegando en la división de conectividad de misión crítica, servidores, ciberseguridad y plataformas tecnológicas de SySo Co. Todas las divisiones comparten el mismo cerebro y gobernanza.
+                </p>
+              </div>
+            </div>
+            <a
+              href="https://sysolat.com"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#1E88E5] text-white text-xs font-semibold hover:bg-[#1976D2] transition-colors flex-shrink-0 shadow-lg shadow-[#1E88E5]/25"
+            >
+              <span>Volver al Ecosistema Principal (sysolat.com)</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </a>
+          </div>
+        )}
+
+        {/* If on Inteligencia division page, show connection back to the central ecosystem */}
+        {isInteligencia && (
+          <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-[#171A21] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-[#1E88E5]/15 border border-[#1E88E5]/30 flex items-center justify-center text-[#42A5F5] flex-shrink-0">
+                <Cpu className="w-6 h-6 text-[#1E88E5]" />
+              </div>
+              <div>
+                <p className="text-base font-bold text-white font-heading">
+                  SySo Co. Inteligencia • Inteligencia Artificial, Ecosistema de Datos & Automatización
+                </p>
+                <p className="text-xs text-[#8C8C8C] mt-0.5">
+                  Estás navegando en la división de agentes autónomos, modelos predictivos, analítica de datos y automatización avanzada de SySo Co. Todas las divisiones comparten el mismo cerebro y gobernanza.
                 </p>
               </div>
             </div>
