@@ -22,6 +22,7 @@ export function Navbar() {
   const isOperaciones = pathname?.startsWith("/operaciones");
   const isEventos = pathname?.startsWith("/eventos");
   const isInfraestructura = pathname?.startsWith("/infraestructura");
+  const isCapital = pathname?.startsWith("/capital");
   const isDivision =
     isStudio ||
     isImagen ||
@@ -31,7 +32,8 @@ export function Navbar() {
     isInteligencia ||
     isOperaciones ||
     isEventos ||
-    isInfraestructura;
+    isInfraestructura ||
+    isCapital;
   const divisionBadge = isStudio
     ? "STUDIO"
     : isImagen
@@ -50,6 +52,8 @@ export function Navbar() {
     ? "EVENTOS"
     : isInfraestructura
     ? "INFRAESTRUCTURA"
+    : isCapital
+    ? "CAPITAL"
     : "";
   const divisionCta = isStudio
     ? "Diagnóstico de Marca"
@@ -69,6 +73,8 @@ export function Navbar() {
     ? "Cotizar Producción"
     : isInfraestructura
     ? "Diagnóstico de Infraestructura"
+    : isCapital
+    ? "Diagnóstico Financiero"
     : "";
 
   useEffect(() => {

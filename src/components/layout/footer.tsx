@@ -62,6 +62,7 @@ export function Footer() {
   const isOperaciones = pathname?.startsWith("/operaciones");
   const isEventos = pathname?.startsWith("/eventos");
   const isInfraestructura = pathname?.startsWith("/infraestructura");
+  const isCapital = pathname?.startsWith("/capital");
   const isDivision =
     isStudio ||
     isImagen ||
@@ -71,7 +72,8 @@ export function Footer() {
     isInteligencia ||
     isOperaciones ||
     isEventos ||
-    isInfraestructura;
+    isInfraestructura ||
+    isCapital;
 
   const handleOpenLegalModal = (tab: LegalTab, e?: React.MouseEvent) => {
     if (e) e.preventDefault();
@@ -306,6 +308,32 @@ export function Footer() {
                 </p>
                 <p className="text-xs text-[#8C8C8C] mt-0.5">
                   Estás navegando en la división de cableado estructurado certificado, fibra óptica, cuartos de telecomunicaciones (MDF/IDF) y canalización pesada de SySo Co. Todas las divisiones comparten el mismo cerebro y gobernanza.
+                </p>
+              </div>
+            </div>
+            <a
+              href="https://sysolat.com"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#1E88E5] text-white text-xs font-semibold hover:bg-[#1976D2] transition-colors flex-shrink-0 shadow-lg shadow-[#1E88E5]/25"
+            >
+              <span>Volver al Ecosistema Principal (sysolat.com)</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </a>
+          </div>
+        )}
+
+        {/* If on Capital division page, show connection back to the central ecosystem */}
+        {isCapital && (
+          <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-[#171A21] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-[#1E88E5]/15 border border-[#1E88E5]/30 flex items-center justify-center text-[#42A5F5] flex-shrink-0">
+                <TrendingUp className="w-6 h-6 text-[#1E88E5]" />
+              </div>
+              <div>
+                <p className="text-base font-bold text-white font-heading">
+                  SySo Co. Capital • Gestión Financiera, Capital de Inversión & Soluciones Estratégicas
+                </p>
+                <p className="text-xs text-[#8C8C8C] mt-0.5">
+                  Estás navegando en la división de estructuración de capital, planeación financiera estratégica, optimización de flujo y rondas de inversión de SySo Co. Todas las divisiones comparten el mismo cerebro y gobernanza.
                 </p>
               </div>
             </div>

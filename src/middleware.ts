@@ -13,6 +13,7 @@ const DIVISION_SUBDOMAINS: Record<string, string> = {
   operaciones: "operaciones",
   eventos: "eventos",
   infraestructura: "infraestructura",
+  capital: "capital",
 };
 
 export function middleware(request: NextRequest) {
